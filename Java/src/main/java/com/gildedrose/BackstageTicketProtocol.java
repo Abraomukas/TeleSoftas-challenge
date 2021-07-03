@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 public class BackstageTicketProtocol extends UpdateProtocol {
+    static final String LABEL = "Backstage passes to a TAFKAL80ETC concert";
     static final int FIRST_QUALITY_WINDOW = 10;
     static final int SECOND_QUALITY_WINDOW = 5;
 

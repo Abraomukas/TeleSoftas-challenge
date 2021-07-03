@@ -82,7 +82,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void backstageTicketsIncreaseQuality_doubleIncreaseWithTenDaysOrLessLeft() {
+    void backstageTicketsQualityIncrease_doubleIncreaseWithTenDaysOrLessLeft() {
         //given
         Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 7, 10);
         Item[] items = new Item[]{item};
@@ -94,7 +94,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void backstageTicketsIncreaseQuality_tripleIncreaseWithFiveDaysOrLessLeft() {
+    void backstageTicketsQualityIncrease_tripleIncreaseWithFiveDaysOrLessLeft() {
         //given
         Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 3, 10);
         Item[] items = new Item[]{item};
@@ -106,7 +106,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void backstageTicketsIncreaseQuality_dropsToZeroAfterTheConcert() {
+    void backstageTicketsQualityIncrease_dropsToZeroAfterTheConcert() {
         //given
         Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10);
         Item[] items = new Item[]{item};
