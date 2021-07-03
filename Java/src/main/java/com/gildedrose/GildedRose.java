@@ -3,78 +3,35 @@ package com.gildedrose;
 class GildedRose {
     Item[] items;
 
+    static final String AGED_BRIE = "Aged Brie";
+    static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+
     public GildedRose(Item[] items) {
         this.items = items;
     }
 
     public void updateQuality() {
         for (Item item : items) {
-            if (isAgedBrie(item) || isBackstageTicket(item)) {
-                increaseQualityOf(item);
-
-
-                if (isBackstageTicket(item)) {
-                    if (item.sellIn < 11) {
-                        increaseQualityOf(item);
-                    }
-
-                    if (item.sellIn < 6) {
-                        increaseQualityOf(item);
-                    }
-                }
-
-            } else {
-                if (item.quality > 0) {
-                    if (!isSulfuras(item)) {
-                        item.quality = item.quality - 1;
-                    }
-                }
-            }
-
-            if (!isSulfuras(item)) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (item.sellIn < 0) {
-                if (!isAgedBrie(item)) {
-                    if (!isBackstageTicket(item)) {
-                        if (item.quality > 0) {
-                            if (!isSulfuras(item)) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    } else {
-                        item.quality = 0;
-                    }
-                } else {
-                    increaseQualityOf(item);
-                }
-            }
+            UpdateProtocol protocol = createProtocolFor(item);
+            protocol.update(item);
         }
     }
 
-    private void increaseQualityOf(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
+    private UpdateProtocol createProtocolFor(Item item) {
+        if (isSulfuras(item)) {
+            return new SulfurasProtocol();
+        } else if (isAgedBrie(item)) {
+            return new AgedBrieProtocol();
         }
-    }
 
-    private boolean isAgedBrie(Item item) {
-        final String agedBrie = "Aged Brie";
-        return itemMatches(item, agedBrie);
-    }
-
-    private boolean isBackstageTicket(Item item) {
-        final String backstageTicket = "Backstage passes to a TAFKAL80ETC concert";
-        return itemMatches(item, backstageTicket);
+        return new UpdateProtocol();
     }
 
     private boolean isSulfuras(Item item) {
-        final String sulfuras = "Sulfuras, Hand of Ragnaros";
-        return itemMatches(item, sulfuras);
+        return item.name.equals(SULFURAS);
     }
 
-    private boolean itemMatches(Item item, String s) {
-        return item.name.equals(s);
+    private boolean isAgedBrie(Item item) {
+        return item.name.equals(AGED_BRIE);
     }
 }
