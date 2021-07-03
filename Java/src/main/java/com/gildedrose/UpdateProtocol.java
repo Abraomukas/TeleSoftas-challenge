@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 public class UpdateProtocol {
+    static final int MAX_QUALITY = 50;
 
     public void update(Item item) {
         qualityIncreaseFor(item);
@@ -13,9 +14,7 @@ public class UpdateProtocol {
     }
 
     protected void qualityIncreaseFor(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
+        decreaseQualityByOne(item);
     }
 
     protected void sellInUpdateFor(Item item) {
@@ -23,13 +22,17 @@ public class UpdateProtocol {
     }
 
     protected void qualityUpdateFor(Item item) {
+        decreaseQualityByOne(item);
+    }
+
+    protected void decreaseQualityByOne(Item item) {
         if (item.quality > 0) {
             item.quality = item.quality - 1;
         }
     }
 
     protected void increaseQualityOf(Item item) {
-        if (item.quality < 50) {
+        if (item.quality < MAX_QUALITY) {
             item.quality = item.quality + 1;
         }
     }

@@ -1,14 +1,16 @@
 package com.gildedrose;
 
 public class BackstageTicketProtocol extends UpdateProtocol {
+    static final int FIRST_QUALITY_WINDOW = 10;
+    static final int SECOND_QUALITY_WINDOW = 5;
 
     protected void qualityIncreaseFor(Item item) {
         increaseQualityOf(item);
 
-        if (item.sellIn < 11) {
+        if (item.sellIn <= FIRST_QUALITY_WINDOW) {
             increaseQualityOf(item);
         }
-        if (item.sellIn < 6) {
+        if (item.sellIn <= SECOND_QUALITY_WINDOW) {
             increaseQualityOf(item);
         }
     }

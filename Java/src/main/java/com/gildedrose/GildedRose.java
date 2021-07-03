@@ -3,6 +3,7 @@ package com.gildedrose;
 class GildedRose {
     Item[] items;
 
+    static final String CONJURED = "Conjured Mana Cake";
     static final String BACKSTAGE_TICKET = "Backstage passes to a TAFKAL80ETC concert";
     static final String AGED_BRIE = "Aged Brie";
     static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
@@ -25,6 +26,8 @@ class GildedRose {
             return new AgedBrieProtocol();
         } else if (isBackstageTicket(item)) {
             return new BackstageTicketProtocol();
+        } else if (isConjured(item)) {
+            return new ConjuredProtocol();
         }
         return new UpdateProtocol();
     }
@@ -39,5 +42,9 @@ class GildedRose {
 
     private boolean isBackstageTicket(Item item) {
         return item.name.equals(BACKSTAGE_TICKET);
+    }
+
+    private boolean isConjured(Item item) {
+        return item.name.equals(CONJURED);
     }
 }

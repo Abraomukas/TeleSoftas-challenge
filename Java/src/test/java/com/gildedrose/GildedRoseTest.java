@@ -117,4 +117,15 @@ class GildedRoseTest {
         assertEquals("Backstage passes to a TAFKAL80ETC concert, -1, 0", app.items[0].toString());
     }
 
+    @Test
+    void conjuredItemsDegradeTwiceAsFast() {
+        //given
+        Item item = new Item("Conjured Mana Cake", 3, 7);
+        Item[] items = new Item[]{item};
+        GildedRose app = new GildedRose(items);
+        //when
+        app.updateQuality();
+        //then
+        assertEquals("Conjured Mana Cake, 2, 5", app.items[0].toString());
+    }
 }
